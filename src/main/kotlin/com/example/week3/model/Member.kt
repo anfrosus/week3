@@ -1,6 +1,6 @@
 package com.example.week3.model
 
-import com.example.week3.dto.MemberResponseDto
+import com.example.week3.dto.response.MemberResponseDto
 import com.example.week3.enums.MemberRoleEnum
 import jakarta.persistence.*
 
@@ -25,7 +25,7 @@ class Member(
     var id: Long? = null
 }
 
-fun Member.toResponse() : MemberResponseDto{
+fun Member.toResponse() : MemberResponseDto {
     return MemberResponseDto(
         memberName = name,
         memberRole = role.name

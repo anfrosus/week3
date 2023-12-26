@@ -1,4 +1,4 @@
-package com.example.week3.dto
+package com.example.week3.dto.request
 
 data class MemberRequestDto(
     var memberName: String,

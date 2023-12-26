@@ -1,6 +1,6 @@
 package com.example.week3.model
 
-import com.example.week3.dto.OrderResponseDto
+import com.example.week3.dto.response.OrderResponseDto
 import com.example.week3.enums.OrderStatusEnum
 import jakarta.persistence.*
 
@@ -11,9 +11,8 @@ class Order(
     @JoinColumn(name = "MEMBER_ID")
     var member: Member,
 
-    @OneToMany(cascade = [CascadeType.ALL])
-    @JoinTable(name = "ORDER_LIST")
-    var menuList: MutableList<Menu> = mutableListOf(),
+    @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL])
+    var orderMenus: MutableSet<OrderMenu> = mutableSetOf(),
 
     @Column(name = "TOTAL_AMOUNT")
     var totalAmount: Long,
@@ -27,12 +26,12 @@ class Order(
     var id: Long? = null
 }
 
-fun Order.toResponse(): OrderResponseDto{
+fun Order.toResponse(): OrderResponseDto {
     return OrderResponseDto(
         orderId = id!!,
         totalAmount = totalAmount,
         orderStatus = status.toString(),
         memberId = member.id!!,
-        memberBalance = member.balance
+        menuList = orderMenus.map { it.menu.toResponse() }
     )
 }

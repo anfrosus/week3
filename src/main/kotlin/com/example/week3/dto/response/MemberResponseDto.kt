@@ -1,4 +1,4 @@
-package com.example.week3.dto
+package com.example.week3.dto.response
 
 import com.example.week3.enums.MemberRoleEnum
 

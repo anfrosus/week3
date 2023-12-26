@@ -1,10 +1,12 @@
 package com.example.week3.service
 
-import com.example.week3.dto.ChargeRequestDto
-import com.example.week3.dto.ChargeResponseDto
-import com.example.week3.dto.MemberRequestDto
-import com.example.week3.dto.MemberResponseDto
+import com.example.week3.dto.request.ChargeRequestDto
+import com.example.week3.dto.response.ChargeResponseDto
+import com.example.week3.dto.request.MemberRequestDto
+import com.example.week3.dto.response.MemberResponseDto
 import com.example.week3.enums.MemberRoleEnum
+import com.example.week3.exception.CustomException
+import com.example.week3.exception.ErrorCode
 import com.example.week3.model.Member
 import com.example.week3.model.toResponse
 import com.example.week3.repository.MemberRepository
@@ -31,9 +33,8 @@ class MemberService(
     fun addBalance(
         chargeRequest: ChargeRequestDto, memberId: Long
     ): ChargeResponseDto {
-        println("들어오니? ${chargeRequest.chargeAmount}")
         val member = memberRepository.findByIdOrNull(memberId)
-            ?: throw Exception()
+            ?: throw CustomException("member", ErrorCode.NOT_FOUND)
         member.balance += chargeRequest.chargeAmount
 
         return ChargeResponseDto(

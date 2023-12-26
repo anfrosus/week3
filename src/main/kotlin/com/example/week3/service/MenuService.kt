@@ -1,7 +1,7 @@
 package com.example.week3.service
 
-import com.example.week3.dto.MenuRequestDto
-import com.example.week3.dto.MenuResponseDto
+import com.example.week3.dto.request.MenuRequestDto
+import com.example.week3.dto.response.MenuResponseDto
 import com.example.week3.model.Menu
 import com.example.week3.model.toResponse
 import com.example.week3.repository.MenuRepository
@@ -22,7 +22,7 @@ class MenuService(
         val menu = Menu(
             name = menuRequest.name,
             description = menuRequest.description,
-            price = menuRequest.price
+            basePrice = menuRequest.price
         )
         return menuRepository.save(menu).toResponse()
     }

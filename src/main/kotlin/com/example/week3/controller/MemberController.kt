@@ -1,12 +1,13 @@
 package com.example.week3.controller
 
-import com.example.week3.dto.ChargeRequestDto
-import com.example.week3.dto.ChargeResponseDto
-import com.example.week3.dto.MemberRequestDto
-import com.example.week3.dto.MemberResponseDto
+import com.example.week3.dto.request.ChargeRequestDto
+import com.example.week3.dto.response.ChargeResponseDto
+import com.example.week3.dto.request.MemberRequestDto
+import com.example.week3.dto.response.MemberResponseDto
 import com.example.week3.service.MemberService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
@@ -31,7 +32,7 @@ class MemberController(
 
     @PutMapping("/charges/{memberId}")
     fun chargePoint(
-        @RequestBody chargeRequest: ChargeRequestDto,
+        @RequestBody @Validated chargeRequest: ChargeRequestDto,
         @PathVariable memberId: Long
     ): ResponseEntity<ChargeResponseDto> {
         return ResponseEntity

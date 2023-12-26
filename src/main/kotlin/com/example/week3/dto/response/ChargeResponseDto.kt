@@ -1,4 +1,4 @@
-package com.example.week3.dto
+package com.example.week3.dto.response
 
 data class ChargeResponseDto(
     var memberId: Long,

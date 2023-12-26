@@ -1,7 +1,7 @@
 package com.example.week3.controller
 
-import com.example.week3.dto.MenuRequestDto
-import com.example.week3.dto.MenuResponseDto
+import com.example.week3.dto.request.MenuRequestDto
+import com.example.week3.dto.response.MenuResponseDto
 import com.example.week3.service.MenuService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
