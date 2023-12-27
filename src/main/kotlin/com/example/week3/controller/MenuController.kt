@@ -2,7 +2,11 @@ package com.example.week3.controller
 
 import com.example.week3.dto.request.MenuRequestDto
 import com.example.week3.dto.response.MenuResponseDto
+import com.example.week3.model.Menu
 import com.example.week3.service.MenuService
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -16,6 +20,13 @@ import org.springframework.web.bind.annotation.RestController
 class MenuController(
     private val menuService: MenuService
 ) {
+
+    @GetMapping("menus/week")
+    fun getMenuOfWeekList() : ResponseEntity<List<MenuResponseDto>>{
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(menuService.getMenuOfWeek())
+    }
 
     @GetMapping("/menus")
     fun getMenuList(): ResponseEntity<List<MenuResponseDto>> {
@@ -38,4 +49,16 @@ class MenuController(
     //메뉴 삭제
 
     //메뉴 수정
+
+    //pageableTest
+    @GetMapping("/test")
+    fun pageable(
+        @PageableDefault(size = 1, sort = ["id"]) pageable: Pageable
+    ): ResponseEntity<Page<MenuResponseDto>>{
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(menuService.test(pageable))
+
+    }
+
 }

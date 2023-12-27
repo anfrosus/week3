@@ -6,6 +6,8 @@ plugins {
     kotlin("jvm") version "1.9.21"
     kotlin("plugin.spring") version "1.9.21"
     kotlin("plugin.jpa") version "1.9.21"
+    //queryDSL
+    kotlin("kapt") version "1.8.22"
 }
 
 group = "com.example"
@@ -19,6 +21,8 @@ repositories {
     mavenCentral()
 }
 
+val queryDslVersion = "5.0.0"
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 //    implementation("org.springframework.boot:spring-boot-starter-security")
@@ -29,6 +33,10 @@ dependencies {
 
 //    runtimeOnly("com.h2database:h2")
     runtimeOnly("org.postgresql:postgresql")
+
+    //queryDSL
+    implementation("com.querydsl:querydsl-jpa:$queryDslVersion:jakarta")
+    kapt("com.querydsl:querydsl-apt:$queryDslVersion:jakarta")
 
 }
 
