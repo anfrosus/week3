@@ -11,6 +11,7 @@ import com.example.week3.model.toResponse
 import com.example.week3.repository.MemberRepository
 import com.example.week3.repository.MenuRepository
 import com.example.week3.repository.OrderRepository
+import org.springframework.dao.OptimisticLockingFailureException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -21,10 +22,27 @@ class OrderService(
     private val memberRepository: MemberRepository,
     private val orderRepository: OrderRepository
 ) {
+//    @Transactional
+//    fun retry(orderRequest: OrderRequestDto): OrderResponseDto{
+//        var retryCount = 0
+//        val maxCount = 10
+//        while (true) {
+//            try {
+//                return createOrder(orderRequest)
+//            }catch (e: OptimisticLockingFailureException){
+//                if (retryCount >= maxCount){
+//                    throw CustomException("", ErrorCode.PLEASE_TRY_AGAIN)
+//                }
+//            }
+//            println(retryCount++)
+//        }
+//    }
     @Transactional
     fun createOrder(orderRequest: OrderRequestDto): OrderResponseDto {
 
-        val member = memberRepository.findByIdOrNull(orderRequest.memberId)
+//        val member = memberRepository.findByIdOrNull(orderRequest.memberId)
+//            ?: throw CustomException("member", ErrorCode.NOT_FOUND)
+        val member = memberRepository.findMemberWithLock(orderRequest.memberId)
             ?: throw CustomException("member", ErrorCode.NOT_FOUND)
 
         val menuList = menuRepository.findMenuListById(orderRequest.menuList)

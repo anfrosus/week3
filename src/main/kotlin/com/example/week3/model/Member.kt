@@ -18,7 +18,11 @@ class Member(
 
     @Column(name = "ROLE")
     @Enumerated(EnumType.STRING)
-    var role: MemberRoleEnum
+    var role: MemberRoleEnum,
+
+//    @Version
+//    @Column(name = "VERSION")
+//    var version: Long = 0
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

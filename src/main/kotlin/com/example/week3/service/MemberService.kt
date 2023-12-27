@@ -33,7 +33,7 @@ class MemberService(
     fun addBalance(
         chargeRequest: ChargeRequestDto, memberId: Long
     ): ChargeResponseDto {
-        val member = memberRepository.findByIdOrNull(memberId)
+        val member = memberRepository.findMemberWithLock(memberId)
             ?: throw CustomException("member", ErrorCode.NOT_FOUND)
         member.balance += chargeRequest.chargeAmount
 
