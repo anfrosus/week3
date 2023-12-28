@@ -17,6 +17,10 @@ class OrderMenu(
     @Column(name = "NUMBER")
     var number: Long
 ) : TimeStamp() {
+
+    init {
+        order.orderMenus.add(this)
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long? = null

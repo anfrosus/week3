@@ -45,7 +45,7 @@ class OrderService(
         val member = memberRepository.findMemberWithLock(orderRequest.memberId)
             ?: throw CustomException("member", ErrorCode.NOT_FOUND)
 
-        val menuList = menuRepository.findMenuListById(orderRequest.menuList)
+        val menuList = menuRepository.findMenuListWithLock(orderRequest.menuList)
         if(menuList.size != orderRequest.menuList.size){
             throw CustomException("menu", ErrorCode.NOT_FOUND)
         }
