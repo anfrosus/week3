@@ -26,7 +26,6 @@ class Init(
             )
             list.add(menu)
         }
-        println("하긴해?")
         menuRepository.saveAll(list)
     }
 
